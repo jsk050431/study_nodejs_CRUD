@@ -1,0 +1,25 @@
+const fs = require("fs");
+const path = require("path");
+
+module.exports = function handleStatic(pahtName, res) {
+    const ext = path.extname(pahtName);
+    const contentType = {
+        ".css": "text/css",
+        ".js": "application/javascript",
+    }[ext];
+    if (contentType === undefined) {
+        res.writeHead(500, { "Content-Type": "text/plain" });
+        console.error("Unexpected extension");
+        res.end("Internal Server Error");
+    }
+    const filePath = `./public${pahtName}`;
+    fs.readFile(filePath, (err, data) => {
+        if (err) {
+            res.writeHead(404);
+            return res.end("File Not Found");
+        } else {
+            res.writeHead(200, { "Content-Type": contentType });
+            res.end(data);
+        }
+    });
+};
