@@ -1,0 +1,24 @@
+{
+  "name": "study_nodejs_crud",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jsk050431/study_nodejs_CRUD.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jsk050431/study_nodejs_CRUD/issues"
+  },
+  "homepage": "https://github.com/jsk050431/study_nodejs_CRUD#readme",
+  "description": "",
+  "dependencies": {
+    "ejs": "^3.1.10"
+  }
+}
