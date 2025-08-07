@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-module.exports = function handleStatic(pahtName, res) {
+module.exports = function staticRouter(pahtName, res) {
     const ext = path.extname(pahtName);
     const contentType = {
         ".css": "text/css",

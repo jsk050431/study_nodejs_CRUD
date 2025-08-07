@@ -1,7 +1,7 @@
 const http = require("http");
 const fs = require("fs");
 const url = require("url");
-const handleStatic = require("./routes/staitc");
+const staticRouter = require("./routes/staitc");
 
 const server = http.createServer(function (req, res) {
     console.log(`request: ${req.method}, ${req.url}`);
@@ -14,7 +14,7 @@ const server = http.createServer(function (req, res) {
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end("<h2>Welcome</h2>");
     } else if (pathName.startsWith("/css") || pathName.startsWith("/js")) {
-        handleStatic(pathName, res);
+        staticRouter(pathName, res);
     } else {
         fs.readFile("./public/notfound.html", (err, data) => {
             if (err) {
