@@ -16,6 +16,7 @@ module.exports = function handleStatic(pahtName, res) {
     fs.readFile(filePath, (err, data) => {
         if (err) {
             res.writeHead(404);
+            console.error(err);
             return res.end("File Not Found");
         } else {
             res.writeHead(200, { "Content-Type": contentType });
