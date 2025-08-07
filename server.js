@@ -4,7 +4,7 @@ const url = require("url");
 const staticRouter = require("./routes/staitc");
 
 const server = http.createServer(function (req, res) {
-    console.log(`request: ${req.method}, ${req.url}`);
+    // console.log(`request: ${req.method}, ${req.url}`);
     const pathName = url.parse(req.url, true).pathname;
     const queryData = url.parse(req.url, true).query;
     if (pathName === "/favicon.ico") {
