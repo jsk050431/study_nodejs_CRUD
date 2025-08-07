@@ -1,6 +1,7 @@
 const http = require("http");
 const fs = require("fs");
 const url = require("url");
+const homeRouter = require("./routes/home");
 const staticRouter = require("./routes/staitc");
 
 const server = http.createServer(function (req, res) {
@@ -11,8 +12,7 @@ const server = http.createServer(function (req, res) {
         res.writeHead(404, { "Content-Type": "text/plain" });
         return res.end();
     } else if (pathName === "/") {
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.end("<h2>Welcome</h2>");
+        homeRouter(req, res);
     } else if (pathName.startsWith("/css") || pathName.startsWith("/js")) {
         staticRouter(pathName, res);
     } else {
