@@ -14,7 +14,7 @@ const fileList = {
         fileList.forEach((fileName) => {
             html += `<li><a href="/content/${fileName}">${fileName}</a></li>`;
         });
-        html = "<ul>" + html + "</ul>";
+        html = `<h2><a href="/">Home</a></h2>` + "<ul>" + html + "</ul>";
         return html;
     },
 };
