@@ -13,7 +13,10 @@ const server = http.createServer(function (req, res) {
         return res.end();
     } else if (pathName === "/") {
         homeRouter(req, res);
-    } else if (pathName.startsWith("/css") || pathName.startsWith("/js")) {
+    } else if (
+        pathName.startsWith("/public/css") ||
+        pathName.startsWith("/public/js")
+    ) {
         staticRouter(pathName, res);
     } else {
         fs.readFile("./public/notfound.html", (err, data) => {

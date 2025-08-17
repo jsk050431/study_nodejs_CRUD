@@ -12,7 +12,7 @@ module.exports = function staticRouter(pahtName, res) {
         console.error("Unexpected extension");
         res.end("Internal Server Error");
     }
-    const filePath = `./public${pahtName}`;
+    const filePath = `./${pahtName}`;
     fs.readFile(filePath, (err, data) => {
         if (err) {
             res.writeHead(404);
