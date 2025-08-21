@@ -10,10 +10,7 @@ module.exports = function homeRouter(req, res) {
             res.end("Internal Server Error");
         }
         const html = ejs.render(template, {
-            title: "Welcome",
             contentsListHTML: await getContentsListHTML(),
-            contentTitle: "Welcome",
-            description: "",
         });
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(html);
