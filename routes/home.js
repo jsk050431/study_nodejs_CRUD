@@ -3,7 +3,7 @@ const ejs = require("ejs");
 const getContentsListHTML = require("../getContentsListHTML");
 
 module.exports = function homeRouter(req, res) {
-    fs.readFile("./public/index.ejs", "utf-8", async (err, template) => {
+    fs.readFile("./public/home.ejs", "utf-8", async (err, template) => {
         if (err) {
             res.writeHead(500);
             console.error(err);
