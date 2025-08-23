@@ -4,6 +4,7 @@ const url = require("url");
 const homeRouter = require("./routes/home");
 const staticRouter = require("./routes/static");
 const contentRouter = require("./routes/content");
+const createRouter = require("./routes/create");
 
 const server = http.createServer(function (req, res) {
     // console.log(`request: ${req.method}, ${req.url}`);
@@ -21,6 +22,8 @@ const server = http.createServer(function (req, res) {
         staticRouter(pathName, res);
     } else if (pathName.startsWith("/content")) {
         contentRouter(pathName, res);
+    } else if (pathName.startsWith("/create")) {
+        createRouter(pathName, req, res);
     } else {
         fs.readFile("./public/notfound.html", (err, data) => {
             if (err) {
