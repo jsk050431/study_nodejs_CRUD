@@ -2,7 +2,7 @@ const http = require("http");
 const fs = require("fs");
 const url = require("url");
 const homeRouter = require("./routes/home");
-const staticRouter = require("./routes/staitc");
+const staticRouter = require("./routes/static");
 const contentRouter = require("./routes/content");
 
 const server = http.createServer(function (req, res) {
