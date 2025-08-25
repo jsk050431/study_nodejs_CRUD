@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require("fs").promises;
 const ejs = require("ejs");
 const getContentsListHTML = require("../getContentsListHTML");
 
@@ -17,34 +17,28 @@ function getFormData(request) {
 
 module.exports = async function createRouter(pathName, req, res) {
     if (pathName === "/create") {
-        fs.readFile("./public/create.ejs", "utf-8", async (err, template) => {
-            if (err) {
-                res.writeHead(500);
-                console.error(err);
-                res.end("Internal Server Error");
-            }
+        try {
+            const template = await fs.readFile("./public/create.ejs", "utf-8");
             const html = ejs.render(template, {
                 contentsListHTML: await getContentsListHTML(),
             });
             res.writeHead(200, { "Content-Type": "text/html" });
             res.end(html);
-        });
+        } catch (err) {
+            res.writeHead(500);
+            console.error(err);
+            res.end("Internal Server Error");
+        }
     } else if (pathName === "/create/process") {
         try {
             const post = await getFormData(req);
             const title = post.title;
             const description = post.description;
-            fs.writeFile(`data/${title}`, description, "utf-8", (err) => {
-                if (err) {
-                    res.writeHead(500);
-                    console.error(err);
-                    res.end("Internal Server Error");
-                }
-                res.writeHead(303, {
-                    Location: encodeURI(`/content/${title}`),
-                });
-                res.end();
+            await fs.writeFile(`data/${title}`, description, "utf-8");
+            res.writeHead(303, {
+                Location: encodeURI(`/content/${title}`),
             });
+            res.end();
         } catch (err) {
             console.error("Error parsing form data:", err);
             res.writeHead(500);

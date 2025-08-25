@@ -1,18 +1,18 @@
-const fs = require("fs");
+const fs = require("fs").promises;
 const ejs = require("ejs");
 const getContentsListHTML = require("../getContentsListHTML");
 
-module.exports = function homeRouter(req, res) {
-    fs.readFile("./public/home.ejs", "utf-8", async (err, template) => {
-        if (err) {
-            res.writeHead(500);
-            console.error(err);
-            res.end("Internal Server Error");
-        }
+module.exports = async function homeRouter(req, res) {
+    try {
+        const template = await fs.readFile("./public/home.ejs", "utf-8");
         const html = ejs.render(template, {
             contentsListHTML: await getContentsListHTML(),
         });
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(html);
-    });
+    } catch (err) {
+        res.writeHead(500);
+        console.error(err);
+        res.end("Internal Server Error");
+    }
 };
