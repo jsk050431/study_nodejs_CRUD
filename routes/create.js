@@ -40,7 +40,7 @@ module.exports = async function createRouter(pathName, req, res) {
                     console.error(err);
                     res.end("Internal Server Error");
                 }
-                res.writeHead(302, {
+                res.writeHead(303, {
                     Location: encodeURI(`/content/${title}`),
                 });
                 res.end();
