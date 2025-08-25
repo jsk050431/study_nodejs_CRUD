@@ -45,7 +45,7 @@ module.exports = async function createRouter(pathName, req, res) {
                 });
                 res.end();
             });
-        } catch {
+        } catch (err) {
             console.error("Error parsing form data:", err);
             res.writeHead(500);
             res.end("Internal Server Error");
