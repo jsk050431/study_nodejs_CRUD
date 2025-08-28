@@ -1,6 +1,7 @@
 const fs = require("fs").promises;
 const ejs = require("ejs");
-const getContentsListHTML = require("../getContentsListHTML");
+const { getContentsListHTML } = require("../lib/fileList");
+
 
 function getFormData(request) {
     const qs = require("querystring");

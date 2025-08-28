@@ -1,6 +1,6 @@
 const fs = require("fs").promises;
 const ejs = require("ejs");
-const getContentsListHTML = require("../getContentsListHTML");
+const { getContentsListHTML } = require("../lib/fileList");
 
 module.exports = async function homeRouter(pathName, res) {
     try {
