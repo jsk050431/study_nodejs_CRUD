@@ -17,7 +17,7 @@ function getFormData(request) {
 module.exports = async function createRouter(pathName, req, res) {
     if (pathName === "/create") {
         try {
-            const template = await fs.readFile("./views/create.ejs", "utf-8");
+            const template = await fs.readFile("./views/createView.ejs", "utf-8");
             const html = ejs.render(template, {
                 contentsListHTML: await getContentsListHTML(),
             });

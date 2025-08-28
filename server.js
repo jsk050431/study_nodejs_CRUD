@@ -1,10 +1,10 @@
 const http = require("http");
 const fs = require("fs");
 const url = require("url");
-const homeRouter = require("./routes/home");
-const staticRouter = require("./routes/static");
-const contentRouter = require("./routes/content");
-const createRouter = require("./routes/create");
+const homeRouter = require("./routes/homeRouter");
+const staticRouter = require("./routes/staticRouter");
+const contentRouter = require("./routes/contentRouter");
+const createRouter = require("./routes/createRouter");
 
 const server = http.createServer(function (req, res) {
     // console.log(`request: ${req.method}, ${req.url}`);

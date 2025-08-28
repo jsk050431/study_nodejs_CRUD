@@ -2,17 +2,12 @@ const fs = require("fs").promises;
 const ejs = require("ejs");
 const { getContentsListHTML } = require("../lib/fileList");
 
-module.exports = async function homeRouter(pathName, res) {
+
+module.exports = async function homeRouter(req, res) {
     try {
-        const template = await fs.readFile("./views/content.ejs", "utf-8");
-        const _title = decodeURIComponent(pathName.split("/")[2]);
-        const content = await fs.readFile(`./data/${_title}`, "utf-8");
-        const _description = content;
+        const template = await fs.readFile("./views/homeView.ejs", "utf-8");
         const html = ejs.render(template, {
-            title: _title,
             contentsListHTML: await getContentsListHTML(),
-            contentTitle: _title,
-            description: _description,
         });
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(html);
