@@ -3,11 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <title>Welcome</title>
+    <script src="public/js/create/confirmFormData.js" defer></script>
   </head>
   <body>
     <%- contentsListHTML %>
-    <form action="http://localhost:3000/create/process" method="post">
-      <p><input type="text" name="title" placeholder="title" /></p>
+    <form id="form" action="http://localhost:3000/create/process" method="post">
+      <p><input id="title" type="text" name="title" placeholder="title" /></p>
       <p><textarea name="description" placeholder="description"></textarea></p>
       <p><input type="submit" /></p>
     </form>
