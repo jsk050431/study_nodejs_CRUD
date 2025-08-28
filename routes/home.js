@@ -4,7 +4,7 @@ const getContentsListHTML = require("../getContentsListHTML");
 
 module.exports = async function homeRouter(req, res) {
     try {
-        const template = await fs.readFile("./public/home.ejs", "utf-8");
+        const template = await fs.readFile("./views/home.ejs", "utf-8");
         const html = ejs.render(template, {
             contentsListHTML: await getContentsListHTML(),
         });

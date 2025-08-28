@@ -4,7 +4,7 @@ const getContentsListHTML = require("../getContentsListHTML");
 
 module.exports = async function homeRouter(pathName, res) {
     try {
-        const template = await fs.readFile("./public/content.ejs", "utf-8");
+        const template = await fs.readFile("./views/content.ejs", "utf-8");
         const _title = pathName.split("/")[2];
         const content = await fs.readFile(`./data/${_title}`, "utf-8");
         const _description = content;
