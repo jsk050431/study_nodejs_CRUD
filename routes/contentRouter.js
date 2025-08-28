@@ -2,7 +2,7 @@ const fs = require("fs").promises;
 const ejs = require("ejs");
 const { getContentsListHTML } = require("../lib/fileList");
 
-module.exports = async function homeRouter(pathName, res) {
+module.exports = async function contentRouter(pathName, res) {
     try {
         const template = await fs.readFile("./views/contentView.ejs", "utf-8");
         const _title = decodeURIComponent(pathName.split("/")[2]);
