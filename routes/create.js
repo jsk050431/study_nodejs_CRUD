@@ -8,10 +8,8 @@ function getFormData(request) {
 
     return new Promise((resolve, reject) => {
         request.on("data", (chunk) => (body += chunk));
-        request.on("end", () => {
-            resolve(qs.parse(body));
-        });
-        request.on("error", () => reject(err));
+        request.on("end", () => resolve(qs.parse(body)));
+        request.on("error", (err) => reject(err));
     });
 }
 
