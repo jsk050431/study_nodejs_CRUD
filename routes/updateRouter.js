@@ -25,6 +25,7 @@ module.exports = async function updateRouter(pathName, targetTitle, req, res) {
                 "utf-8"
             );
             const html = ejs.render(template, {
+                title: targetTitle,
                 contentsListHTML: await getContentsListHTML(),
                 targetTitle: targetTitle,
                 targetDescription: targetDescription,
