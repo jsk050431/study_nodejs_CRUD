@@ -45,7 +45,7 @@ module.exports = async function updateRouter(pathName, targetTitle, req, res) {
             await fs.rename(`data/${targetTitle}`, `data/${newTitle}`);
             await fs.writeFile(`data/${newTitle}`, description, "utf-8");
             res.writeHead(303, {
-                Location: encodeURI(`/content/${newTitle}`),
+                Location: `/content/${encodeURIComponent(newTitle)}`,
             });
             res.end();
         } catch (err) {
