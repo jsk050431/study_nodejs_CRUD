@@ -6,6 +6,7 @@ const staticRouter = require("./routes/staticRouter");
 const contentRouter = require("./routes/contentRouter");
 const createRouter = require("./routes/createRouter");
 const updateRouter = require("./routes/updateRouter");
+const deleteRouter = require("./routes/deleteRouter");
 
 const server = http.createServer(function (req, res) {
     // console.log(`request: ${req.method}, ${req.url}`);
@@ -28,6 +29,8 @@ const server = http.createServer(function (req, res) {
     } else if (pathName.startsWith("/update")) {
         const target = queryData.target;
         updateRouter(pathName, target, req, res);
+    } else if (pathName === "/delete/process") {
+        deleteRouter(req, res);
     } else {
         fs.readFile("./public/notfound.html", (err, data) => {
             if (err) {

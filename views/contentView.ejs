@@ -9,5 +9,9 @@
     <h1><%= contentTitle %></h1>
     <p><%= description %></p>
     <a href="/update?target=<%= encodeURIComponent(contentTitle) %>">Edit</a>
+    <form action="/delete/process" method="post">
+      <input type="hidden" name="targetTitle" value="<%= contentTitle %>">
+      <input type="submit" value="Delete">
+    </form>
   </body>
 </html>
