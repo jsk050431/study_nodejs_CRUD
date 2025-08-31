@@ -1,17 +1,7 @@
 const fs = require("fs").promises;
 const ejs = require("ejs");
+const getFormData = require("../lib/getFormData");
 const { getContentsListHTML } = require("../lib/fileList");
-
-function getFormData(request) {
-    const qs = require("querystring");
-    let body = "";
-
-    return new Promise((resolve, reject) => {
-        request.on("data", (chunk) => (body += chunk));
-        request.on("end", () => resolve(qs.parse(body)));
-        request.on("error", (err) => reject(err));
-    });
-}
 
 module.exports = async function createRouter(pathName, req, res) {
     if (pathName === "/create") {

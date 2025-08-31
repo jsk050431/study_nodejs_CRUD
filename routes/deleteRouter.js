@@ -1,15 +1,5 @@
 const fs = require("fs").promises;
-
-function getFormData(request) {
-    const qs = require("querystring");
-    let body = "";
-
-    return new Promise((resolve, reject) => {
-        request.on("data", (chunk) => (body += chunk));
-        request.on("end", () => resolve(qs.parse(body)));
-        request.on("error", (err) => reject(err));
-    });
-}
+const getFormData = require("../lib/getFormData");
 
 module.exports = async function deleteRouter(req, res) {
     try {
