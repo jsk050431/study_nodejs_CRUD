@@ -2,7 +2,6 @@ const fs = require("fs").promises;
 const ejs = require("ejs");
 const { getContentsListHTML } = require("../lib/fileList");
 
-
 function getFormData(request) {
     const qs = require("querystring");
     let body = "";
@@ -17,7 +16,10 @@ function getFormData(request) {
 module.exports = async function createRouter(pathName, req, res) {
     if (pathName === "/create") {
         try {
-            const template = await fs.readFile("./views/createView.ejs", "utf-8");
+            const template = await fs.readFile(
+                "./views/createView.ejs",
+                "utf-8"
+            );
             const html = ejs.render(template, {
                 contentsListHTML: await getContentsListHTML(),
             });
@@ -39,7 +41,7 @@ module.exports = async function createRouter(pathName, req, res) {
             });
             res.end();
         } catch (err) {
-            console.error("Error parsing form data:", err);
+            console.error(err);
             res.writeHead(500);
             res.end("Internal Server Error");
         }

@@ -49,7 +49,7 @@ module.exports = async function updateRouter(pathName, targetTitle, req, res) {
             });
             res.end();
         } catch (err) {
-            console.error("Error parsing form data:", err);
+            console.error(err);
             res.writeHead(500);
             res.end("Internal Server Error");
         }
