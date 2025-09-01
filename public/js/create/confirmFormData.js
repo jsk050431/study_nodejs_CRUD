@@ -1,6 +1,13 @@
 const form = document.getElementById("form");
 form.addEventListener("submit", (event) => {
     const title = document.getElementById("title").value;
+
+    const BANNED_CHARS = /[\/\\:*?"<>|]/;
+    if (BANNED_CHARS.test(title)) {
+        alert(`제목에는 다음 문자를 사용할 수 없습니다.\n\\ / : * ? < > |`);
+        event.preventDefault();
+    }
+
     let contentsList = [...document.getElementsByClassName("content")].map(
         (data) => data.innerText
     );
