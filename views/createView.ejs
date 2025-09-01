@@ -3,15 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <title>Create</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/layout.css">
     <script src="/public/js/create/validateFormData.js" defer></script>
   </head>
   <body>
-    <%- contentsListHTML %>
-    <form id="form" action="/create/process" method="post">
-      <p><input id="title" type="text" name="title" placeholder="title" /></p>
-      <p><textarea name="description" placeholder="description"></textarea></p>
-      <p><input type="submit" value="Create" /></p>
-      <p><a href="/">Cancel</a></p>
-    </form>
+    <div id="container">
+      <%- navbar %>
+      <main>
+        <%- contentsListHTML %>
+        <form id="form" action="/create/process" method="post">
+          <p><input id="title" type="text" name="title" placeholder="title" /></p>
+          <p><textarea name="description" placeholder="description"></textarea></p>
+          <div class="actions">
+            <button type="submit" class="btn btn-outline-primary">Create</button>
+            <button type="button" class="btn btn-outline-secondary"
+            onclick="location.href='/'">Cancel</button>
+          </div>
+        </form>
+      </main>
+    </div>
   </body>
 </html>

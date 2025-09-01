@@ -1,6 +1,7 @@
 const fs = require("fs").promises;
 const ejs = require("ejs");
 const { getContentsListHTML } = require("../lib/fileList");
+const getNavbar = require("../lib/getNavbar");
 
 module.exports = async function contentRouter(pathName, res) {
     try {
@@ -10,6 +11,7 @@ module.exports = async function contentRouter(pathName, res) {
         const description = content;
         const html = ejs.render(template, {
             title: title,
+            navbar: await getNavbar(),
             contentsListHTML: await getContentsListHTML(),
             contentTitle: title,
             description: description,

@@ -3,16 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <title><%= title %> - Edit</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/layout.css">
     <script src="/public/js/create/validateFormData.js" defer></script>
   </head>
   <body>
-    <%- contentsListHTML %>
-    <form id="form" action="/update/process" method="post">
-      <p><input id="targetTitle" type="hidden" name="targetTitle" value=<%= targetTitle %> /></p>
-      <p><input id="title" type="text" name="newTitle" placeholder="title" value=<%= targetTitle %> /></p>
-      <p><textarea name="description" placeholder="description"><%= targetDescription %></textarea></p>
-      <p><input type="submit" value="Edit" /></p>
-      <a href="/content/<%= encodeURIComponent(title) %>">Cancel</a>
-    </form>
+    <div id="container">
+      <%- navbar %>
+      <main>
+        <%- contentsListHTML %>
+        <form id="form" action="/update/process" method="post">
+          <p><input id="targetTitle" type="hidden" name="targetTitle" value=<%= targetTitle %> /></p>
+          <p><input id="title" type="text" name="newTitle" placeholder="title" value=<%= targetTitle %> /></p>
+          <p><textarea name="description" placeholder="description"><%= targetDescription %></textarea></p>
+          <div class="actions">
+            <button type="submit" class="btn btn-outline-warning">Edit</button>
+            <button type="button" class="btn btn-outline-secondary"
+            onclick="location.href='/content/<%= encodeURIComponent(title) %>'">Cancel</button>
+          </div>
+        </form>
+      </main>
+    </div>
   </body>
 </html>

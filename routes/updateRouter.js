@@ -2,6 +2,7 @@ const fs = require("fs").promises;
 const ejs = require("ejs");
 const getFormData = require("../lib/getFormData");
 const { getContentsListHTML } = require("../lib/fileList");
+const getNavbar = require("../lib/getNavbar");
 
 module.exports = async function updateRouter(pathName, targetTitle, req, res) {
     if (pathName === "/update") {
@@ -16,6 +17,7 @@ module.exports = async function updateRouter(pathName, targetTitle, req, res) {
             );
             const html = ejs.render(template, {
                 title: targetTitle,
+                navbar: await getNavbar(),
                 contentsListHTML: await getContentsListHTML(),
                 targetTitle: targetTitle,
                 targetDescription: targetDescription,

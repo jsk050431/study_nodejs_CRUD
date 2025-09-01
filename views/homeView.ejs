@@ -3,10 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <title>Welcome</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/layout.css">
   </head>
   <body>
-    <%- contentsListHTML %>
-    <a href="./create">Create</a>
-    <h1>Welcome</h1>
+    <div id="container">
+      <%- navbar %>
+      <main>
+        <%- contentsListHTML %>
+        <button type="button" class="btn btn-outline-primary"
+          onclick="location.href='/create'">Create</button>
+      </main>
+    </div>
   </body>
 </html>

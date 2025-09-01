@@ -1,5 +1,6 @@
 const fs = require("fs").promises;
 const getFormData = require("../lib/getFormData");
+const getNavbar = require("../lib/getNavbar");
 
 module.exports = async function deleteRouter(req, res) {
     try {
