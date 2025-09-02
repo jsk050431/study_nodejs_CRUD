@@ -35,6 +35,11 @@ main {
     margin-bottom: 20px;
 }
 
+.list-group-item.active {
+    background-color: #7eb2ff;
+    border-color: #7eb2ff;
+}
+
 #contentDescription {
     padding-left: 3px;
     margin-bottom: 20px;
