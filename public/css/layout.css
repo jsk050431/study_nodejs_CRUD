@@ -45,6 +45,10 @@ main {
     border-color: #5e9fff;
 }
 
+#contentTitle {
+    margin-bottom: 40px;
+}
+
 #contentDescription {
     padding-left: 3px;
     margin-bottom: 20px;
