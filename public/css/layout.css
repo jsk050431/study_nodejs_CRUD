@@ -49,6 +49,7 @@ main {
     padding-left: 3px;
     margin-bottom: 20px;
     height: 100%;
+    white-space: pre-wrap;
 }
 
 .actions {
