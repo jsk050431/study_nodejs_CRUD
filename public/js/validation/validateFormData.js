@@ -1,13 +1,25 @@
 const form = document.getElementById("form");
-form.addEventListener("submit", (event) => {
-    const title = document.getElementById("title").value;
 
+function checkEmptyTitle(title) {
+    if (!title.length) {
+        return "제목을 입력하세요.";
+    } else return null;
+}
+
+function checkEmptyDescription(description) {
+    if (!description.length) {
+        return "내용을 입력하세요.";
+    } else return null;
+}
+
+function checkIncludeBannedChar(title) {
     const BANNED_CHARS = /[\/\\:*?"<>|]/;
     if (BANNED_CHARS.test(title)) {
-        alert(`제목에는 다음 문자를 사용할 수 없습니다.\n\\ / : * ? < > |`);
-        event.preventDefault();
-    }
+        return `제목에는 다음 문자를 사용할 수 없습니다.\n\ / : * ? < > |`;
+    } else return null;
+}
 
+function checkDuplicateTitle(title) {
     let contentsList = [...document.getElementsByClassName("content")].map(
         (data) => data.innerText
     );
@@ -17,7 +29,34 @@ form.addEventListener("submit", (event) => {
         contentsList = contentsList.filter((data) => data !== targetTitle);
     }
     if (contentsList.includes(title)) {
-        alert("이미 존재하는 제목입니다.");
-        event.preventDefault();
+        return "이미 존재하는 제목입니다.";
+    } else return null;
+}
+
+async function startValidation(title, description) {
+    const validations = [
+        () => checkEmptyTitle(title),
+        () => checkIncludeBannedChar(title),
+        () => checkDuplicateTitle(title),
+        () => checkEmptyDescription(description),
+    ];
+
+    for (const step of validations) {
+        const msg = await step();
+        if (msg) {
+            alert(msg);
+            return;
+        }
     }
-});
+}
+
+function main() {
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const title = document.getElementById("title").value.trim();
+        const description = document.getElementById("description").value.trim();
+        startValidation(title, description);
+    });
+}
+
+main();

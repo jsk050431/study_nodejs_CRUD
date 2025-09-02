@@ -15,7 +15,7 @@
         <form id="form" action="/edit/process" method="post">
           <p><input id="targetTitle" type="hidden" name="targetTitle" value=<%= targetTitle %> /></p>
           <p><input id="title" type="text" name="newTitle" placeholder="title" value=<%= targetTitle %> /></p>
-          <p><textarea name="description" placeholder="description"><%= targetDescription %></textarea></p>
+          <p><textarea id="description" name="description" placeholder="description"><%= targetDescription %></textarea></p>
           <div class="actions">
             <button type="submit" class="btn btn-outline-warning">Edit</button>
             <button type="button" class="btn btn-outline-secondary"
