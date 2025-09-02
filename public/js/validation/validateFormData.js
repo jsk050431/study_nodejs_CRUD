@@ -1,5 +1,3 @@
-const form = document.getElementById("form");
-
 function checkEmptyTitle(title) {
     if (!title.length) {
         return "제목을 입력하세요.";
@@ -45,17 +43,21 @@ async function startValidation(title, description) {
         const msg = await step();
         if (msg) {
             alert(msg);
-            return;
+            return false;
         }
     }
+    return true;
 }
 
 function main() {
+    const form = document.getElementById("form");
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
         const title = document.getElementById("title").value.trim();
         const description = document.getElementById("description").value.trim();
-        startValidation(title, description);
+
+        const isvalid = await startValidation(title, description);
+        if (isvalid) form.submit();
     });
 }
 
