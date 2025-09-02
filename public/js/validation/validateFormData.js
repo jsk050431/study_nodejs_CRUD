@@ -17,10 +17,10 @@ function checkIncludeBannedChar(title) {
     } else return null;
 }
 
-function checkDuplicateTitle(title) {
-    let contentsList = [...document.getElementsByClassName("content")].map(
-        (data) => data.innerText
-    );
+async function checkDuplicateTitle(title) {
+    const response = await fetch("/api/getContentsList");
+    let contentsList = await response.json();
+
     // edit일 때 (id = targetTitle 태그 존재시), contentsList에서 자기자신 제목 빼기
     if (document.getElementById("targetTitle")) {
         const targetTitle = document.getElementById("targetTitle").value;

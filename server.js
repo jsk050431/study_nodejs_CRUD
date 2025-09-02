@@ -7,6 +7,7 @@ const contentRouter = require("./routes/contentRouter");
 const createRouter = require("./routes/createRouter");
 const editRouter = require("./routes/editRouter");
 const deleteRouter = require("./routes/deleteRouter");
+const apiRouter = require("./routes/apiRouter");
 
 const server = http.createServer(function (req, res) {
     // console.log(`request: ${req.method}, ${req.url}`);
@@ -31,6 +32,8 @@ const server = http.createServer(function (req, res) {
         editRouter(pathName, target, req, res);
     } else if (pathName === "/delete/process") {
         deleteRouter(req, res);
+    } else if (pathName.startsWith("/api")) {
+        apiRouter(pathName, res);
     } else {
         fs.readFile("./public/notfound.html", (err, data) => {
             if (err) {
