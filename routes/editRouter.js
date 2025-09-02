@@ -4,11 +4,11 @@ const getFormData = require("../lib/getFormData");
 const { getContentsListHTML } = require("../lib/fileList");
 const getNavbar = require("../lib/getNavbar");
 
-module.exports = async function updateRouter(pathName, targetTitle, req, res) {
-    if (pathName === "/update") {
+module.exports = async function editRouter(pathName, targetTitle, req, res) {
+    if (pathName === "/edit") {
         try {
             const template = await fs.readFile(
-                "./views/updateView.ejs",
+                "./views/editView.ejs",
                 "utf-8"
             );
             const targetDescription = await fs.readFile(
@@ -29,7 +29,7 @@ module.exports = async function updateRouter(pathName, targetTitle, req, res) {
             console.error(err);
             res.end("Internal Server Error");
         }
-    } else if (pathName === "/update/process") {
+    } else if (pathName === "/edit/process") {
         try {
             const post = await getFormData(req);
             const targetTitle = post.targetTitle;

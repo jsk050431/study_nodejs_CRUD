@@ -16,7 +16,7 @@
         <p id="contentDescription"><%= description %></p>
         <div class="actions">
           <button type="button" class="btn btn-outline-warning"
-          onclick="location.href='/update?target=<%= encodeURIComponent(contentTitle) %>'">Edit</button>
+          onclick="location.href='/edit?target=<%= encodeURIComponent(contentTitle) %>'">Edit</button>
           <form id="form_delete" action="/delete/process" method="post">
             <input type="hidden" name="targetTitle" value="<%= contentTitle %>">
             <button type="submit" class="btn btn-outline-danger">Delete</button>

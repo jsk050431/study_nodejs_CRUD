@@ -11,7 +11,7 @@ form.addEventListener("submit", (event) => {
     let contentsList = [...document.getElementsByClassName("content")].map(
         (data) => data.innerText
     );
-    // 업데이트일 때 (id = targetTitle 태그 존재시), contentsList에서 자기자신 제목 빼기
+    // edit일 때 (id = targetTitle 태그 존재시), contentsList에서 자기자신 제목 빼기
     if (document.getElementById("targetTitle")) {
         const targetTitle = document.getElementById("targetTitle").value;
         contentsList = contentsList.filter((data) => data !== targetTitle);

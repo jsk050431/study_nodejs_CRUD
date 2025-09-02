@@ -5,7 +5,7 @@ const homeRouter = require("./routes/homeRouter");
 const staticRouter = require("./routes/staticRouter");
 const contentRouter = require("./routes/contentRouter");
 const createRouter = require("./routes/createRouter");
-const updateRouter = require("./routes/updateRouter");
+const editRouter = require("./routes/editRouter");
 const deleteRouter = require("./routes/deleteRouter");
 
 const server = http.createServer(function (req, res) {
@@ -26,9 +26,9 @@ const server = http.createServer(function (req, res) {
         contentRouter(pathName, res);
     } else if (pathName.startsWith("/create")) {
         createRouter(pathName, req, res);
-    } else if (pathName.startsWith("/update")) {
+    } else if (pathName.startsWith("/edit")) {
         const target = queryData.target;
-        updateRouter(pathName, target, req, res);
+        editRouter(pathName, target, req, res);
     } else if (pathName === "/delete/process") {
         deleteRouter(req, res);
     } else {

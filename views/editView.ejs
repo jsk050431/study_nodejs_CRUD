@@ -12,7 +12,7 @@
       <%- navbar %>
       <main>
         <%- contentsListHTML %>
-        <form id="form" action="/update/process" method="post">
+        <form id="form" action="/edit/process" method="post">
           <p><input id="targetTitle" type="hidden" name="targetTitle" value=<%= targetTitle %> /></p>
           <p><input id="title" type="text" name="newTitle" placeholder="title" value=<%= targetTitle %> /></p>
           <p><textarea name="description" placeholder="description"><%= targetDescription %></textarea></p>
