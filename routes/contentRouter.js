@@ -12,7 +12,7 @@ module.exports = async function contentRouter(pathName, res) {
         const html = ejs.render(template, {
             title: title,
             navbar: await getNavbar(),
-            contentsListHTML: await getContentsListHTML(),
+            contentsListHTML: await getContentsListHTML(title),
             contentTitle: title,
             description: description,
         });

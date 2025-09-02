@@ -7,10 +7,7 @@ const getNavbar = require("../lib/getNavbar");
 module.exports = async function editRouter(pathName, targetTitle, req, res) {
     if (pathName === "/edit") {
         try {
-            const template = await fs.readFile(
-                "./views/editView.ejs",
-                "utf-8"
-            );
+            const template = await fs.readFile("./views/editView.ejs", "utf-8");
             const targetDescription = await fs.readFile(
                 `./data/${targetTitle}`,
                 "utf-8"
@@ -18,7 +15,7 @@ module.exports = async function editRouter(pathName, targetTitle, req, res) {
             const html = ejs.render(template, {
                 title: targetTitle,
                 navbar: await getNavbar(),
-                contentsListHTML: await getContentsListHTML(),
+                contentsListHTML: await getContentsListHTML(targetTitle),
                 targetTitle: targetTitle,
                 targetDescription: targetDescription,
             });
