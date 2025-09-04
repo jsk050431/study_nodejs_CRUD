@@ -4,7 +4,7 @@
     "main": "server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "pm2 start server.js --watch --ignore-watch='data'",
+        "start": "nodemon server.js",
         "diff": "git diff --cached > diff.patch"
     },
     "repository": {
@@ -21,5 +21,8 @@
     "description": "",
     "dependencies": {
         "ejs": "^3.1.10"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.10"
     }
 }
