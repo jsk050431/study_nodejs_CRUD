@@ -4,8 +4,8 @@ const getFormData = require("../lib/getFormData");
 const { getContentsListHTML } = require("../lib/fileList");
 const getNavbar = require("../lib/getNavbar");
 
-module.exports = async function createRouter(pathName, req, res) {
-    if (pathName === "/create") {
+module.exports = async function createRouter(req, res) {
+    if (req.method === "GET") {
         try {
             const template = await fs.readFile(
                 "./views/createView.ejs",
@@ -22,7 +22,7 @@ module.exports = async function createRouter(pathName, req, res) {
             console.error(err);
             res.end("Internal Server Error");
         }
-    } else if (pathName === "/create/process") {
+    } else if (req.method === "POST") {
         try {
             const post = await getFormData(req);
             const title = post.title;

@@ -26,7 +26,7 @@ const server = http.createServer(function (req, res) {
     } else if (pathName.startsWith("/content")) {
         contentRouter(pathName, res);
     } else if (pathName.startsWith("/create")) {
-        createRouter(pathName, req, res);
+        createRouter(req, res);
     } else if (pathName.startsWith("/edit")) {
         const target = queryData.target;
         editRouter(pathName, target, req, res);
