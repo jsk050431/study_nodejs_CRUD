@@ -1,7 +1,7 @@
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
 
-module.exports = function staticRouter(pahtName, res) {
+export default function staticRouter(pahtName, res) {
     const ext = path.extname(pahtName);
     const contentType = {
         ".css": "text/css",

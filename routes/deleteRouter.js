@@ -1,6 +1,6 @@
-const fs = require("fs").promises;
+import fs from "fs/promises";
 
-module.exports = async function deleteRouter(formData, res) {
+export default async function deleteRouter(formData, res) {
     try {
         const post = formData;
         const targetTitle = post.targetTitle;

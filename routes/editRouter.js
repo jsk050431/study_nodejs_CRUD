@@ -1,9 +1,9 @@
-const fs = require("fs").promises;
-const ejs = require("ejs");
-const { getContentsListHTML } = require("../lib/fileList");
-const getNavbar = require("../lib/getNavbar");
+import fs from "fs/promises";
+import ejs from "ejs";
+import { getContentsListHTML } from "../lib/fileList.js";
+import getNavbar from "../lib/getNavbar.js";
 
-module.exports = async function editRouter(targetTitle, formData, method, res) {
+export default async function editRouter(targetTitle, formData, method, res) {
     if (method === "GET") {
         try {
             const template = await fs.readFile("./views/editView.ejs", "utf-8");

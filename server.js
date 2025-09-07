@@ -1,14 +1,14 @@
-const http = require("http");
-const fs = require("fs");
-const url = require("url");
-const getFormData = require("./lib/getFormData");
-const homeRouter = require("./routes/homeRouter");
-const staticRouter = require("./routes/staticRouter");
-const contentRouter = require("./routes/contentRouter");
-const createRouter = require("./routes/createRouter");
-const editRouter = require("./routes/editRouter");
-const deleteRouter = require("./routes/deleteRouter");
-const apiRouter = require("./routes/apiRouter");
+import http from "http";
+import fs from "fs";
+import url from "url";
+import getFormData from "./lib/getFormData.js";
+import homeRouter from "./routes/homeRouter.js";
+import staticRouter from "./routes/staticRouter.js";
+import contentRouter from "./routes/contentRouter.js";
+import createRouter from "./routes/createRouter.js";
+import editRouter from "./routes/editRouter.js";
+import deleteRouter from "./routes/deleteRouter.js";
+import apiRouter from "./routes/apiRouter.js";
 
 const server = http.createServer(async function (req, res) {
     const formData = await getFormData(req);
