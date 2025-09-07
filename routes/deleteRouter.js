@@ -1,10 +1,8 @@
 const fs = require("fs").promises;
-const getFormData = require("../lib/getFormData");
-const getNavbar = require("../lib/getNavbar");
 
-module.exports = async function deleteRouter(req, res) {
+module.exports = async function deleteRouter(formData, res) {
     try {
-        const post = await getFormData(req);
+        const post = formData;
         const targetTitle = post.targetTitle;
         await fs.unlink(`data/${targetTitle}`);
         res.writeHead(303, { Location: "/" });

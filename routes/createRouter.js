@@ -1,11 +1,10 @@
 const fs = require("fs").promises;
 const ejs = require("ejs");
-const getFormData = require("../lib/getFormData");
 const { getContentsListHTML } = require("../lib/fileList");
 const getNavbar = require("../lib/getNavbar");
 
-module.exports = async function createRouter(req, res) {
-    if (req.method === "GET") {
+module.exports = async function createRouter(formData, method, res) {
+    if (method === "GET") {
         try {
             const template = await fs.readFile(
                 "./views/createView.ejs",
@@ -22,9 +21,9 @@ module.exports = async function createRouter(req, res) {
             console.error(err);
             res.end("Internal Server Error");
         }
-    } else if (req.method === "POST") {
+    } else if (method === "POST") {
         try {
-            const post = await getFormData(req);
+            const post = formData;
             const title = post.title;
             const description = post.description;
             await fs.writeFile(`data/${title}`, description, "utf-8");

@@ -12,6 +12,7 @@
       <%- navbar %>
       <main>
         <form id="form" action="/edit/process" method="post">
+          <input type="hidden" name="_method" value="PUT">
           <input id="targetTitle" type="hidden" name="targetTitle" value=<%= targetTitle %> />
           <p><input id="title" class="titleInput" type="text" name="newTitle" placeholder="title" value=<%= targetTitle %> /></p>
           <p><textarea id="description" class="descriptionInput" name="description" placeholder="description"><%= targetDescription %></textarea></p>

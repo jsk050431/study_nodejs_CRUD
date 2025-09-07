@@ -1,11 +1,10 @@
 const fs = require("fs").promises;
 const ejs = require("ejs");
-const getFormData = require("../lib/getFormData");
 const { getContentsListHTML } = require("../lib/fileList");
 const getNavbar = require("../lib/getNavbar");
 
-module.exports = async function editRouter(pathName, targetTitle, req, res) {
-    if (pathName === "/edit") {
+module.exports = async function editRouter(targetTitle, formData, method, res) {
+    if (method === "GET") {
         try {
             const template = await fs.readFile("./views/editView.ejs", "utf-8");
             const targetDescription = await fs.readFile(
@@ -26,9 +25,9 @@ module.exports = async function editRouter(pathName, targetTitle, req, res) {
             console.error(err);
             res.end("Internal Server Error");
         }
-    } else if (pathName === "/edit/process") {
+    } else if (method === "PUT") {
         try {
-            const post = await getFormData(req);
+            const post = formData;
             const targetTitle = post.targetTitle;
             const newTitle = post.newTitle;
             const description = post.description;
