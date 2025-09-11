@@ -1,15 +1,15 @@
+import express from "express";
 import fs from "fs/promises";
+import notFound from "../lib/notFound.js";
 
-export default async function deleteRouter(formData, res) {
-    try {
-        const post = formData;
-        const targetTitle = post.targetTitle;
-        await fs.unlink(`data/${targetTitle}`);
-        res.writeHead(303, { Location: "/" });
-        res.end();
-    } catch (err) {
-        console.error(err);
-        res.writeHead(500);
-        res.end("Internal Server Error");
-    }
-};
+const router = express.Router();
+
+router.delete("/", async (req, res) => {
+    const { targetTitle } = req.body;
+    await fs.unlink(`data/${targetTitle}`);
+    res.status(200).redirect("/");
+});
+
+router.use(notFound);
+
+export default router;

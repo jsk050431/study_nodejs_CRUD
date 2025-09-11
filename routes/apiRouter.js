@@ -1,8 +1,9 @@
+import express from "express";
 import { fileList } from "../lib/fileList.js";
 
-export default async function apiRouter(pathName, res) {
-    if (pathName === "/api/getContentsList") {
-        const contentsList = JSON.stringify(await fileList.getList());
-        res.end(contentsList);
-    }
-};
+const router = express.Router();
+router.get("/getContentsList", async (req, res) => {
+    res.status(200).json(await fileList.getList());
+});
+
+export default router;

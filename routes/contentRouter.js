@@ -1,26 +1,30 @@
+import express from "express";
 import fs from "fs/promises";
 import ejs from "ejs";
-import { getContentsListHTML } from "../lib/fileList.js";
+import * as fileList from "../lib/fileList.js";
 import getNavbar from "../lib/getNavbar.js";
+import notFound from "../lib/notFound.js";
+import createError from "http-errors";
 
-export default async function contentRouter(pathName, res) {
-    try {
-        const template = await fs.readFile("./views/contentView.ejs", "utf-8");
-        const title = decodeURIComponent(pathName.split("/")[2]);
-        const content = await fs.readFile(`./data/${title}`, "utf-8");
-        const description = content;
-        const html = ejs.render(template, {
-            title: title,
-            navbar: await getNavbar(),
-            contentsListHTML: await getContentsListHTML(title),
-            contentTitle: title,
-            description: description,
-        });
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.end(html);
-    } catch (err) {
-        res.writeHead(500);
-        console.error(err);
-        res.end("Internal Server Error");
+const router = express.Router();
+
+router.get("/:contentName", async (req, res, next) => {
+    const template = await fs.readFile("./views/contentView.ejs", "utf-8");
+    const title = req.params.contentName;
+    if (!(await fileList.isExist(title))) {
+        return next(createError(404));
     }
-};
+    const description = await fs.readFile(`./data/${title}`, "utf-8");
+    const html = ejs.render(template, {
+        title: title,
+        navbar: await getNavbar(),
+        contentsListHTML: await fileList.getContentsListHTML(title),
+        contentTitle: title,
+        description: description,
+    });
+    res.status(200).type("html").send(html);
+});
+
+router.use(notFound);
+
+export default router;

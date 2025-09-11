@@ -4,15 +4,14 @@
     <meta charset="UTF-8" />
     <title><%= title %> - Edit</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/public/css/layout.css">
-    <script src="/public/js/validation/validateFormData.js" defer></script>
+    <link rel="stylesheet" href="/static/css/layout.css">
+    <script src="/static/js/validation/validateFormData.js" defer></script>
   </head>
   <body>
     <div id="container">
       <%- navbar %>
       <main>
-        <form id="form" action="/edit/process" method="post">
-          <input type="hidden" name="_method" value="PUT">
+        <form id="form" action="/edit?_method=PUT" method="post">
           <input id="targetTitle" type="hidden" name="targetTitle" value=<%= targetTitle %> />
           <p><input id="title" class="titleInput" type="text" name="newTitle" placeholder="title" value=<%= targetTitle %> /></p>
           <p><textarea id="description" class="descriptionInput" name="description" placeholder="description"><%= targetDescription %></textarea></p>

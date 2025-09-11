@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <title><%= title %></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/public/css/layout.css">
-    <script src="/public/js/delete/confirmDelete.js" defer></script>
+    <link rel="stylesheet" href="/static/css/layout.css">
+    <script src="/static/js/delete/confirmDelete.js" defer></script>
   </head>
   <body>
     <div id="container">
@@ -16,9 +16,8 @@
         <p id="contentDescription"><%= description %></p>
         <div class="actions">
           <button type="button" class="btn btn-outline-warning"
-          onclick="location.href='/edit?target=<%= encodeURIComponent(contentTitle) %>'">Edit</button>
-          <form id="form_delete" action="/delete" method="post">
-            <input type="hidden" name="_method" value="DELETE">
+          onclick="location.href='/edit/<%= encodeURIComponent(contentTitle) %>'">Edit</button>
+          <form id="form_delete" action="/delete?_method=DELETE" method="post">
             <input type="hidden" name="targetTitle" value="<%= contentTitle %>">
             <button type="submit" class="btn btn-outline-danger">Delete</button>
           </form>

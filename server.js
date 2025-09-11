@@ -1,54 +1,42 @@
-import http from "http";
-import fs from "fs";
-import url from "url";
-import getFormData from "./lib/getFormData.js";
+import express from "express";
+import morgan from "morgan";
+import methodOverride from "method-override";
 import homeRouter from "./routes/homeRouter.js";
-import staticRouter from "./routes/staticRouter.js";
 import contentRouter from "./routes/contentRouter.js";
 import createRouter from "./routes/createRouter.js";
 import editRouter from "./routes/editRouter.js";
 import deleteRouter from "./routes/deleteRouter.js";
 import apiRouter from "./routes/apiRouter.js";
+import notFound from "./lib/notFound.js";
 
-const server = http.createServer(async function (req, res) {
-    const formData = await getFormData(req);
-    if (formData._method) req.method = formData._method;
-    console.log(`request: ${req.method}, ${req.url}`);
-    const pathName = url.parse(req.url, true).pathname;
-    const queryData = url.parse(req.url, true).query;
+import path from "path";
+import { fileURLToPath } from "url";
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-    if (pathName === "/favicon.ico") {
-        res.writeHead(404, { "Content-Type": "text/plain" });
-        return res.end();
-    } else if (pathName === "/") {
-        homeRouter(req, res);
-    } else if (
-        pathName.startsWith("/public/css") ||
-        pathName.startsWith("/public/js")
-    ) {
-        staticRouter(pathName, res);
-    } else if (pathName.startsWith("/content")) {
-        contentRouter(pathName, res);
-    } else if (pathName.startsWith("/create")) {
-        createRouter(formData, req.method, res);
-    } else if (pathName.startsWith("/edit")) {
-        const target = queryData.target;
-        editRouter(target, formData, req.method, res);
-    } else if (pathName === "/delete") {
-        deleteRouter(formData, res);
-    } else if (pathName.startsWith("/api")) {
-        apiRouter(pathName, res);
+const server = express();
+server.use(morgan("tiny"));
+server.use(express.json());
+server.use(express.urlencoded({ extended: false }));
+server.use(methodOverride("_method"));
+
+server.get("/favicon.ico", (req, res) => res.sendStatus(404));
+server.use("/static", express.static(path.join(__dirname, "public")));
+
+server.all("/", homeRouter);
+server.use("/content", contentRouter);
+server.use("/create", createRouter);
+server.use("/edit", editRouter);
+server.use("/delete", deleteRouter);
+server.use("/api", apiRouter);
+
+server.use(notFound);
+server.use((err, req, res, next) => {
+    if (err.status === 404) {
+        console.error(err);
+        notFound(req, res);
     } else {
-        fs.readFile("./public/notfound.html", (err, data) => {
-            if (err) {
-                res.writeHead(500);
-                console.error(err);
-                res.end("Internal Server Error");
-            } else {
-                res.writeHead(404, { "Content-Type": "text/html" });
-                res.end(data);
-            }
-        });
+        console.error(err);
+        res.sendStatus(500);
     }
 });
 
