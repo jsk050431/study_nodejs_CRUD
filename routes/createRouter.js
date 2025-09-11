@@ -7,12 +7,10 @@ import getNavbar from "../lib/getNavbar.js";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-    const template = await fs.readFile("./views/createView.ejs", "utf-8");
-    const html = ejs.render(template, {
+    res.status(200).render("createView", {
         navbar: await getNavbar(),
         contentsListHTML: await getContentsListHTML(),
     });
-    res.status(200).type("html").send(html);
 });
 
 router.post("/", async (req, res) => {

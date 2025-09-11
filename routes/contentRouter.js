@@ -9,20 +9,18 @@ import createError from "http-errors";
 const router = express.Router();
 
 router.get("/:contentName", async (req, res, next) => {
-    const template = await fs.readFile("./views/contentView.ejs", "utf-8");
     const title = req.params.contentName;
     if (!(await fileList.isExist(title))) {
         return next(createError(404));
     }
     const description = await fs.readFile(`./data/${title}`, "utf-8");
-    const html = ejs.render(template, {
+    res.status(200).render("contentView", {
         title: title,
         navbar: await getNavbar(),
         contentsListHTML: await fileList.getContentsListHTML(title),
         contentTitle: title,
         description: description,
     });
-    res.status(200).type("html").send(html);
 });
 
 router.use(notFound);

@@ -13,20 +13,17 @@ router.get("/:contentName", async (req, res, next) => {
     if (!(await fileList.isExist(targetTitle))) {
         return next(createError(404));
     }
-
-    const template = await fs.readFile("./views/editView.ejs", "utf-8");
     const targetDescription = await fs.readFile(
         `./data/${targetTitle}`,
         "utf-8"
     );
-    const html = ejs.render(template, {
+    res.status(200).render("editView", {
         title: targetTitle,
         navbar: await getNavbar(),
         contentsListHTML: await fileList.getContentsListHTML(targetTitle),
         targetTitle: targetTitle,
         targetDescription: targetDescription,
     });
-    res.status(200).type("html").send(html);
 });
 
 router.put("/", async (req, res) => {

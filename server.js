@@ -18,6 +18,8 @@ server.use(morgan("tiny"));
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
 server.use(methodOverride("_method"));
+server.set("views", path.join(__dirname, "views"));
+server.set("view engine", "ejs");
 
 server.get("/favicon.ico", (req, res) => res.sendStatus(404));
 server.use("/static", express.static(path.join(__dirname, "public")));

@@ -8,12 +8,10 @@ import notFound from "../lib/notFound.js";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-    const template = await fs.readFile("./views/homeView.ejs", "utf-8");
-    const html = ejs.render(template, {
+    res.status(200).render("homeView", {
         navbar: await getNavbar(),
         contentsListHTML: await getContentsListHTML(),
     });
-    res.status(200).type("html").send(html);
 });
 
 router.use(notFound);
