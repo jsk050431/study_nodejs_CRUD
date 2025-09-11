@@ -14,7 +14,6 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-    console.log(req.body);
     const { title, description } = req.body;
     await fs.writeFile(`data/${title}`, description, "utf-8");
     res.status(201).redirect(`/content/${encodeURIComponent(title)}`);
