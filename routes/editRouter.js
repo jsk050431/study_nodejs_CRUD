@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get("/:contentName", async (req, res, next) => {
     const targetTitle = req.params.contentName;
-    if (!(await fileList.isExist(targetTitle))) {
+    if (!(await fileList.isExists(targetTitle))) {
         return next(createError(404));
     }
     const targetDescription = await fs.readFile(
