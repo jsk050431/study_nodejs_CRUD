@@ -11,7 +11,7 @@
     <div id="container">
       <%- navbar %>
       <main>
-        <form id="form" action="/create" method="POST">
+        <form id="form" action="/create?_method=POST" method="post">
           <p><input id="title" class="titleInput" type="text" name="title" placeholder="title" /></p>
           <p><textarea id="description" class="descriptionInput" name="description" placeholder="description"></textarea></p>
           <div class="actions">
