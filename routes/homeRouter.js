@@ -1,17 +1,10 @@
 import express from "express";
-import { getContentsListHTML } from "../lib/fileList.js";
-import getNavbar from "../lib/getNavbar.js";
+import * as homeController from "../controller/homeController.js";
 import notFound from "../lib/notFound.js";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-    res.status(200).render("homeView", {
-        navbar: await getNavbar(),
-        contentsListHTML: await getContentsListHTML(),
-    });
-});
-
+router.get("/", homeController.getHomeView);
 router.use(notFound);
 
 export default router;
