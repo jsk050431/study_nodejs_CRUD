@@ -1,6 +1,5 @@
 import express from "express";
 import fs from "fs/promises";
-import ejs from "ejs";
 import * as fileList from "../lib/fileList.js";
 import getNavbar from "../lib/getNavbar.js";
 import notFound from "../lib/notFound.js";
