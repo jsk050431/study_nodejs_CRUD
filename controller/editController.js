@@ -15,7 +15,6 @@ export async function getEditView(req, res, next) {
     res.status(200).render("editView", {
         title: targetTitle,
         navbar: await getNavbar(),
-        contentsListHTML: await fileList.getContentsListHTML(targetTitle),
         targetTitle: targetTitle,
         targetDescription: targetDescription,
     });
