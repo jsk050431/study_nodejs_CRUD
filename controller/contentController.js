@@ -1,18 +1,20 @@
-import fs from "fs/promises";
-import * as fileList from "../lib/fileList.js";
+import * as notesLib from "../lib/notesLib.js";
 import getNavbar from "../lib/getNavbar.js";
 import createError from "http-errors";
+import { getNote } from "../data/notesData.js";
 
 export async function getContentView(req, res, next) {
     const title = req.params.contentName;
-    if (!(await fileList.isExists(title))) {
+    const titleExists = await notesLib.isExists(title);
+    if (!titleExists) {
         return next(createError(404));
     }
-    const description = await fs.readFile(`./data/${title}`, "utf-8");
+    const note = await getNote(title);
+    const description = note.description;
     res.status(200).render("contentView", {
         title: title,
         navbar: await getNavbar(),
-        contentsListHTML: await fileList.getContentsListHTML(title),
+        contentsListHTML: await notesLib.getContentsListHTML(title),
         contentTitle: title,
         description: description,
     });

@@ -1,9 +1,9 @@
 import express from "express";
-import { fileList } from "../lib/fileList.js";
+import { notes } from "../lib/notesLib.js";
 
 const router = express.Router();
 router.get("/getContentsList", async (req, res) => {
-    res.status(200).json(await fileList.getList());
+    res.status(200).json(await notes.getList());
 });
 
 export default router;
