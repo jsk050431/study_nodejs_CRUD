@@ -1,7 +1,7 @@
 import { db } from "../db/database.js";
 
 export async function getAllTitles() {
-    const result = await db.execute("SELECT title FROM notes");
+    const result = await db.execute("SELECT title FROM notes ORDER BY id");
     const titles = result[0].map((row) => {
         return row.title;
     });
