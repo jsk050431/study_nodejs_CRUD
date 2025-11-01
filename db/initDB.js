@@ -1,4 +1,4 @@
-import { insertInitialRows } from "../data/notesData.js";
+import { insertSeedData } from "../data/notesData.js";
 
 export async function initDB(sequelize) {
     const tables = await sequelize.showAllSchemas();
@@ -10,6 +10,6 @@ export async function initDB(sequelize) {
     await sequelize.sync();
 
     if (!notesTableExists) {
-        await insertInitialRows();
+        await insertSeedData();
     }
 }

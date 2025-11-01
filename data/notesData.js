@@ -23,18 +23,18 @@ const Note = sequelize.define("note", {
     },
 });
 
-export async function insertInitialRows() {
-    const initialRowsJson = await fs.readdir("./data/initialRows");
-    const initialRows = await Promise.all(
-        initialRowsJson.map(async (target) => {
+export async function insertSeedData() {
+    const seedDataJson = await fs.readdir("./data/seed");
+    const seedData = await Promise.all(
+        seedDataJson.map(async (target) => {
             const json = await fs.readFile(
-                `./data/initialRows/${target}`,
+                `./data/seed/${target}`,
                 "utf8"
             );
             return JSON.parse(json);
         })
     );
-    await Note.bulkCreate(initialRows);
+    await Note.bulkCreate(seedData);
 }
 
 export async function getAllTitles() {
