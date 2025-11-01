@@ -9,6 +9,8 @@ import deleteRouter from "./routes/deleteRouter.js";
 import apiRouter from "./routes/apiRouter.js";
 import notFound from "./lib/notFound.js";
 
+import { config } from "./config.js";
+
 import path from "path";
 import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -42,4 +44,4 @@ server.use((err, req, res, next) => {
     }
 });
 
-server.listen(3000);
+server.listen(config.host.port);
