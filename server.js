@@ -9,11 +9,14 @@ import deleteRouter from "./routes/deleteRouter.js";
 import apiRouter from "./routes/apiRouter.js";
 import notFound from "./lib/notFound.js";
 
-import { config } from "./config.js";
-
 import path from "path";
 import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+import { config } from "./config.js";
+import { sequelize } from "./db/database.js";
+import { initDB } from "./db/initDB.js";
+
 
 const server = express();
 server.use(morgan("tiny"));
@@ -43,5 +46,7 @@ server.use((err, req, res, next) => {
         res.sendStatus(500);
     }
 });
+
+await initDB(sequelize);
 
 server.listen(config.host.port);
