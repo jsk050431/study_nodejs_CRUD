@@ -1,6 +1,6 @@
-import fs from "fs/promises";
-import { getContentsListHTML } from "../lib/fileList.js";
+import { getContentsListHTML } from "../lib/notesLib.js";
 import getNavbar from "../lib/getNavbar.js";
+import { createNote } from "../data/notesData.js";
 
 export async function getCreateView(req, res) {
     res.status(200).render("createView", {
@@ -11,6 +11,6 @@ export async function getCreateView(req, res) {
 
 export async function createContent(req, res) {
     const { title, description } = req.body;
-    await fs.writeFile(`data/${title}`, description, "utf-8");
+    await createNote(title, description);
     res.status(201).redirect(`/content/${encodeURIComponent(title)}`);
 }

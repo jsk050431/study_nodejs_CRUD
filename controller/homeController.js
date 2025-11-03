@@ -1,4 +1,4 @@
-import { getContentsListHTML } from "../lib/fileList.js";
+import { getContentsListHTML } from "../lib/notesLib.js";
 import getNavbar from "../lib/getNavbar.js";
 
 export async function getHomeView(req, res) {

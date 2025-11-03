@@ -1,7 +1,8 @@
-import fs from "fs/promises";
+import { deleteNote, getNote } from "../data/notesData.js";
 
 export async function deleteContent(req, res) {
     const { targetTitle } = req.body;
-    await fs.unlink(`data/${targetTitle}`);
+    const target = await getNote(targetTitle);
+    await deleteNote(target.id);
     res.status(200).redirect("/");
 }
