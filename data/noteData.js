@@ -1,36 +1,11 @@
-import SQ from "sequelize";
-import { sequelize } from "../db/database.js";
+import Note from "../models/noteModel.js";
 import fs from "fs/promises";
-
-const DataTypes = SQ.DataTypes;
-
-const Note = sequelize.define("note", {
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        allowNull: false,
-        unique: true,
-        autoIncrement: true,
-    },
-    title: {
-        type: DataTypes.STRING(45),
-        allowNull: false,
-        unique: true,
-    },
-    description: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-    },
-});
 
 export async function insertSeedData() {
     const seedDataJson = await fs.readdir("./data/seed");
     const seedData = await Promise.all(
         seedDataJson.map(async (target) => {
-            const json = await fs.readFile(
-                `./data/seed/${target}`,
-                "utf8"
-            );
+            const json = await fs.readFile(`./data/seed/${target}`, "utf8");
             return JSON.parse(json);
         })
     );

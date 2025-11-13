@@ -1,4 +1,4 @@
-import { deleteNote, getNote } from "../data/notesData.js";
+import { deleteNote, getNote } from "../data/noteData.js";
 
 export async function deleteContent(req, res) {
     const { targetTitle } = req.body;

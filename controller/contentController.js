@@ -1,7 +1,7 @@
 import * as notesLib from "../lib/notesLib.js";
 import getNavbar from "../lib/getNavbar.js";
 import createError from "http-errors";
-import { getNote } from "../data/notesData.js";
+import { getNote } from "../data/noteData.js";
 
 export async function getContentView(req, res, next) {
     const title = req.params.contentName;

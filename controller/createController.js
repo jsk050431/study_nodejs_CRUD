@@ -1,6 +1,6 @@
 import { getContentsListHTML } from "../lib/notesLib.js";
 import getNavbar from "../lib/getNavbar.js";
-import { createNote } from "../data/notesData.js";
+import { createNote } from "../data/noteData.js";
 
 export async function getCreateView(req, res) {
     res.status(200).render("createView", {

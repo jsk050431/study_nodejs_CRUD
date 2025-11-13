@@ -1,7 +1,7 @@
 import * as notesLib from "../lib/notesLib.js";
 import getNavbar from "../lib/getNavbar.js";
 import createError from "http-errors";
-import { editNote, getNote } from "../data/notesData.js";
+import { editNote, getNote } from "../data/noteData.js";
 
 export async function getEditView(req, res, next) {
     const targetTitle = req.params.contentName;

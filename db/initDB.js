@@ -1,4 +1,5 @@
-import { insertSeedData } from "../data/notesData.js";
+import "../models/noteModel.js";
+import { insertSeedData } from "../data/noteData.js";
 
 export async function initDB(sequelize) {
     const tables = await sequelize.showAllSchemas();
