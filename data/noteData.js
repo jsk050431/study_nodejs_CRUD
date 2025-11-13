@@ -38,5 +38,5 @@ export async function editNote(id, newTitle, description) {
 
 export async function deleteNote(id) {
     const target = await Note.findByPk(id);
-    target.destroy();
+    await target.destroy();
 }
